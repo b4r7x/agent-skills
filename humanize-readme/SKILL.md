@@ -1,6 +1,10 @@
 ---
 name: humanize-readme
 description: Rewrites a README.md to remove AI slop — buzzwords, generic openers, fake enthusiasm, and formulaic structure — replacing it with direct, honest, human-sounding writing. This skill should be used when the user wants to humanize a README, remove AI-generated writing patterns, make documentation sound less like ChatGPT wrote it, or asks to "fix the README", "humanize readme", "remove AI slop", "make it sound human".
+metadata:
+  author: b4r7x
+  version: "1.0.0"
+  argument-hint: <readme-path>
 ---
 
 # Humanize README
