@@ -51,6 +51,39 @@ Choose one:
 - `Modified file(s) only with inline comments explaining changes` — for complex refactors
 - `Diff format` — when showing what changed matters
 - `Step-by-step plan, then implementation` — for architectural changes
+- `XML-structured prompt` — when targeting Claude in agentic workflows (see below)
+
+#### XML format option (Claude-specific)
+
+For complex agentic tasks, XML tags outperform plain Markdown headers. Use when the task involves multiple files, a plan-then-act workflow, or tool-calling agents:
+
+```xml
+<context>
+  [Framework, key libraries, relevant file paths]
+</context>
+<instructions>
+  [Precise task description — one action verb sentence]
+</instructions>
+<constraints>
+  [What NOT to do, style rules, size limits]
+</constraints>
+<output_format>
+  [Code only / with explanation / diff]
+</output_format>
+<acceptance_criteria>
+  [Testable conditions]
+</acceptance_criteria>
+```
+
+#### Plan-then-act option (complex tasks)
+
+For tasks touching more than 3 files or requiring architectural decisions, split into two prompts:
+
+**Prompt 1 (plan):** Ask for a step-by-step plan only. No code yet. Review the plan.
+
+**Prompt 2 (act):** Paste the approved plan as context, then ask for implementation.
+
+This prevents the agent from going off-rails on a large task and catching mistakes before they're embedded in code.
 
 ### Acceptance Criteria
 Testable conditions:

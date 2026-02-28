@@ -29,6 +29,9 @@ Before writing a single word of the refined prompt, research the current project
 ```bash
 cat README.md 2>/dev/null | head -80
 cat CLAUDE.md 2>/dev/null | head -60
+cat AGENTS.md 2>/dev/null | head -60
+cat .github/copilot-instructions.md 2>/dev/null | head -40
+cat .cursorrules 2>/dev/null | head -40
 cat package.json 2>/dev/null | head -40
 find . -maxdepth 2 -type d | grep -v node_modules | grep -v .git | head -25
 git log --oneline -8 2>/dev/null
@@ -55,6 +58,8 @@ Using the intent from Phase 1 and the context from Phase 2, generate a structure
 ```
 
 Output the refined prompt in a fenced code block so the user can copy it easily.
+
+**For complex tasks targeting Claude in an agentic context**, prefer XML-structured format over Markdown headers — see `references/ai-coding-prompt-guide.md` for the template.
 
 **For field-by-field guidance and anti-patterns:** `references/ai-coding-prompt-guide.md`
 

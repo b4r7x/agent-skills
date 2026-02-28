@@ -13,9 +13,12 @@ Run these checks from highest to lowest signal — stop when you have enough con
 cat README.md 2>/dev/null | head -80
 cat CLAUDE.md 2>/dev/null | head -60
 cat AGENTS.md 2>/dev/null | head -60
+cat .github/copilot-instructions.md 2>/dev/null | head -40
+cat .cursorrules 2>/dev/null | head -40
+ls .cursor/rules/ 2>/dev/null | head -10
 ```
 
-Extracts: project purpose, tech stack, coding conventions, commands.
+Extracts: project purpose, tech stack, coding conventions, commands, agent-specific rules.
 
 ### 2. Stack Detection (always run)
 

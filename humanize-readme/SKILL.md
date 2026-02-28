@@ -29,10 +29,13 @@ Read `references/slop-patterns.md` for the full list. Flag these in the README:
 
 **High-signal slop patterns:**
 - Banned buzzwords: `seamlessly`, `robust`, `scalable`, `leverage`, `cutting-edge`, `comprehensive`, `empower`, `intuitive`, `powerful`, `game-changer`
+- 2026-era hedging/filler: `"it's worth noting"`, `"let's explore"`, `"this is designed to"`, `"makes it easy to"`, `"enables developers to"`, `"ensures"`, `"has been designed"`
 - Generic openers starting with "In today's...", "This powerful tool...", "This repository aims to..."
 - Feature lists with empty adjectives: "Blazing fast", "Enterprise-grade", "Intuitive API"
 - Suspiciously polished completeness with no honest gaps
 - Conclusions that philosophize about the project
+- **Uniform sentence length** — every sentence the same rhythm (burstiness check)
+- **No personal voice** — no "why it exists", no honest limitations, no tradeoffs mentioned
 
 ### Step 3 — Rewrite
 
@@ -61,6 +64,7 @@ Rewrite the README applying these rules:
 - Add content that wasn't there — only rewrite existing content
 - Change technical accuracy — keep the same claims, just strip the fluff
 - Make it curt to the point of being unhelpful — clarity > brevity
+- Touch badge rows (`[![...](...)](#)` lines) — CI badges, version badges, license badges stay exactly as-is
 
 ### Step 4 — Output
 

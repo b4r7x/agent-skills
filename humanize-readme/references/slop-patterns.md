@@ -36,6 +36,14 @@ ecosystem         → often fine, but watch for vague use ("a thriving ecosystem
 solution          → name the actual thing ("a CLI tool", "a library")
 journey           → remove
 experience        → usually removable ("user experience" → just say what it does)
+it's worth noting → remove — just say the thing
+let's explore     → remove — just start explaining
+this is designed to → "it does X", or restructure
+makes it easy to  → name what it actually does; don't claim ease
+enables developers to → "lets you", or name the action
+allows you to     → just say what happens ("you can do X" → "does X")
+has been designed → "does", "works", "handles"
+ensures           → say what it actually does (not "ensures correctness" → "validates input")
 ```
 
 ## Banned Opening Sentences
@@ -159,6 +167,45 @@ It's fine to say: `Not tested on Windows yet`, `This is experimental`, `PRs welc
 - **Specific numbers** when relevant — not "fast", but "~50ms"
 - **Direct commands** — "clone this, run that"
 - **No unsolicited philosophy** about software development
+
+## Burstiness — Vary Sentence Rhythm
+
+The single biggest tell of AI writing is uniform sentence length. Every sentence is ~15-20 words. Same structure. Same rhythm. Same pace.
+
+Vary it deliberately.
+
+❌ **AI rhythm (all sentences roughly equal length):**
+> FastCache provides an in-memory caching solution for Node.js applications. It supports TTL-based expiry and automatic eviction policies. The library includes a simple get/set/del API that developers can integrate quickly.
+
+✅ **Human rhythm (short and long mixed):**
+> FastCache is a Node.js in-memory cache. Thin wrapper around a Map. Supports TTL and auto-eviction. I wrote it because every other cache library I tried had an API that felt like it was designed by committee — seven methods when you need three.
+
+Short sentences. Then a longer one that explains the why. Then short again.
+
+## Personal Voice Signals
+
+Real READMEs have gaps. They have opinions. They have a reason to exist.
+
+**Add at least one of these:**
+- Why the author built it: "I needed X, and nothing did Y"
+- Honest limitations: "Windows support is untested", "This is alpha software"
+- A specific tradeoff: "Chose X over Y because Z — if you need Z, use that instead"
+- Known rough edges: "The CLI flag naming is inconsistent, sorry"
+- Self-corrections: "Well, almost everything — see known issues"
+
+These signals read as human because they are. AI doesn't volunteer its own limitations.
+
+## README Type Conventions
+
+Different project types have different expectations. Don't write a library README like an app README.
+
+**CLI tool** — Lead with the command. Show a real usage example before anything else. Config flags matter.
+
+**Library / package** — Show the import and a minimal working code snippet in the first screen. API reference belongs near the end or in separate docs.
+
+**App / service** — Screenshot or demo link near the top helps. Architecture only if it's genuinely complex.
+
+**Internal/company tool** — Skip "why this exists" for external audiences. Go straight to how to run it.
 
 ## What Good Human READMEs Don't Need
 
