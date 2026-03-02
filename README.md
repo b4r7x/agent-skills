@@ -53,6 +53,23 @@ Takes a rough prompt idea and turns it into a structured AI coding prompt, after
 2. Researches the current project (stack, file structure, conventions, git history)
 3. Outputs a structured prompt with: Role, Context, Task, Constraints, Output format, Acceptance criteria, and specific file references
 
+---
+
+### [`deep-plan`](./deep-plan/)
+
+Takes a rough idea and autonomously turns it into an implementation plan. Researches your project, asks clarifying questions, then generates and executes its own prompt to produce a structured plan with todos.
+
+**Triggers:** "plan this", "deep plan", "turn this into a plan", "zaplanuj to", "zrób plan", vague feature requests
+
+**What it does:**
+1. Decomposes the rough input — identifies scope, ambiguities, and files to analyze
+2. Deep-dives into the project (reads files, maps dependencies, understands patterns)
+3. Asks clarifying questions one at a time (multiple-choice, max ~5)
+4. Generates an internal prompt for itself, then executes it
+5. Produces a structured implementation plan with file changes, todos, and considerations
+
+Best used in plan mode — saves plan.md and populates SQL todos automatically.
+
 ## Contributing
 
 Each skill is a directory at the root of this repo. See [skills.sh](https://skills.sh/) for the ecosystem.
