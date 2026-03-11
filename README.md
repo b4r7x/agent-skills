@@ -70,6 +70,76 @@ Takes a rough idea and autonomously turns it into an implementation plan. Resear
 
 Best used in plan mode — saves plan.md and populates SQL todos automatically.
 
+---
+
+## React Skills
+
+A suite of 8 React skills extracted from senior-level patterns, anti-patterns, and decision guides. Use individually or start with `react-senior-guide` as an entry point.
+
+### [`react-senior-guide`](./react-senior-guide/) — Start here
+
+Comprehensive React reference that routes to all 7 specialized skills below. Includes cross-cutting principles and an AI code review checklist (15 checks).
+
+**Triggers:** writing or reviewing any React code
+
+---
+
+### [`react-usecallback`](./react-usecallback/)
+
+When to use useCallback — React Compiler impact, the memo() requirement, valid use cases (useEffect deps, custom hooks, context).
+
+**Triggers:** useCallback usage, memoization decisions, "should I wrap this in useCallback?"
+
+---
+
+### [`react-usememo`](./react-usememo/)
+
+When to use useMemo — 4 valid cases (expensive computation, stable ref for memo'd child, useEffect dep, context value), decision heuristic.
+
+**Triggers:** useMemo usage, performance optimization, "should I memoize this?"
+
+---
+
+### [`react-usecontext`](./react-usecontext/)
+
+Context patterns — when to use context, value optimization (useMemo + useCallback + memo), compound components, alternatives table.
+
+**Triggers:** useContext, context re-renders, compound components, prop drilling decisions
+
+---
+
+### [`react-useref`](./react-useref/)
+
+useRef vs useState — 4 valid cases (DOM access, mutable values, stable callbacks, external libs), useEffectEvent replacement, decision table.
+
+**Triggers:** useRef usage, "should this be state or ref?", DOM manipulation, timer IDs
+
+---
+
+### [`react-useeffect`](./react-useeffect/)
+
+When useEffect is needed — decision tree, 6 valid cases, 6 anti-patterns, dependency pitfalls, cleanup checklist.
+
+**Triggers:** useEffect usage, "is this effect necessary?", derived state via effect, missing cleanup
+
+---
+
+### [`react-design-patterns`](./react-design-patterns/)
+
+12 React patterns ranked by 2025 popularity — Custom Hook, Compound Components, Headless, Container/Presentational, Provider, Render Props, Children as Function, Props Getters, Error Boundary, Portal, HOC (legacy), Atomic Design.
+
+**Triggers:** "which pattern should I use?", component architecture decisions, design system patterns
+
+---
+
+### [`react-anti-patterns`](./react-anti-patterns/)
+
+18 anti-patterns organized by detection difficulty — stale closures, state mutation, boolean explosion, component inside component, useEffect abuse, and more. Includes a code review checklist.
+
+**Triggers:** code review, AI-generated React code review, "what's wrong with this code?"
+
+---
+
 ## Contributing
 
 Each skill is a directory at the root of this repo. See [skills.sh](https://skills.sh/) for the ecosystem.
