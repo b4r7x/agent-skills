@@ -1,6 +1,6 @@
 ---
 name: react-useeffect
-description: Use when writing, reviewing, or debugging useEffect in React. Covers the 6 valid use cases, 6 anti-patterns, dependency pitfalls, and the decision tree for whether you actually need an effect.
+description: Use when writing, reviewing, or debugging useEffect in React. Covers the 6 valid use cases, 7 anti-patterns, dependency pitfalls, and the decision tree for whether you actually need an effect.
 metadata:
   author: b4r7x
   version: "1.0.0"
@@ -162,7 +162,28 @@ useEffect(() => { setComment(''); }, [userId]);
 <Profile key={userId} userId={userId} />
 ```
 
-### 6. App initialization
+### 6. Adjusting state when props/state change via effect
+```jsx
+// ❌ Extra render cycle — renders stale UI, commits to DOM, then re-renders
+useEffect(() => {
+  if (error) setOtpValue("");
+}, [error]);
+
+// ✅ Adjust state during render (documented React pattern)
+// React skips the stale commit — clears value before painting
+const [prevState, setPrevState] = useState(state);
+if (state !== prevState) {
+  setPrevState(state);
+  if (error) setOtpValue("");
+}
+```
+This is the **"Storing information from previous renders"** pattern from the official React `useState` docs. Key rules:
+- Use `useState` (not `useRef`) to store the previous value — ref mutation during render is a side effect
+- Guard with an `if` condition to avoid infinite loops
+- Prefer deriving values or using `key` when possible — this is a last resort
+- See: [useState — Storing information from previous renders](https://react.dev/reference/react/useState)
+
+### 7. App initialization
 ```jsx
 // ❌ Runs twice in Strict Mode
 useEffect(() => { checkAuthToken(); }, []);
