@@ -189,7 +189,39 @@ Every agent checks ALL of these against its assigned files. Cross-cutting agents
 - [ ] God components that wire too many things together
 - [ ] Grab-bag utility files with unrelated functions
 
-### 3. Anti-Slop -- AI-Generated Patterns
+### 3. KISS -- Keep It Simple
+
+- [ ] Clever code that a junior dev can't understand in 30 seconds
+- [ ] Nested ternaries (>2 levels) where early returns or helpers would be clearer
+- [ ] Complex generic types where a simpler type would suffice
+- [ ] Abstractions that obscure rather than clarify
+- [ ] Multiple indirection layers (A re-exports B which re-exports C)
+- [ ] Overly generic APIs when only one use case exists
+- [ ] Conditional logic that could be replaced by a lookup table or map
+
+### 4. YAGNI -- You Aren't Gonna Need It
+
+- [ ] Configuration options for hardcoded values that will never change
+- [ ] Feature flags or extensibility hooks with zero consumers
+- [ ] Helper functions used in exactly one place that could be inlined
+- [ ] Wrapper functions that just pass arguments through
+- [ ] Abstract base classes/factories for a single implementation
+- [ ] "Pluggable" architecture with only one plugin
+- [ ] Parameters that are always passed the same value
+
+### 5. Over-Engineering & Premature Abstraction
+
+- [ ] Factory pattern for 1-2 variants (just use if/switch)
+- [ ] Generic utility extracted for 1-2 call sites (inline until 3rd)
+- [ ] Abstraction layers that add indirection without value
+- [ ] Config-driven behavior that could be direct code
+- [ ] Separate interface + implementation for internal-only code
+- [ ] Builder/strategy/visitor patterns where a function would do
+- [ ] Wrapper hooks around `store.use()` that add no logic
+- [ ] "Future-proofing" code for requirements that don't exist yet
+- [ ] Prop-drilling through N components when the child could read the store directly
+
+### 6. Anti-Slop -- AI-Generated Patterns
 
 - [ ] Comments restating what code does ("// Create X" before create call)
 - [ ] Section dividers ("// --- section ---")
@@ -201,7 +233,7 @@ Every agent checks ALL of these against its assigned files. Cross-cutting agents
 - [ ] Try-catch blocks catching impossible errors
 - [ ] Fallback values that never trigger
 
-### 4. Naming & Conventions
+### 7. Naming & Conventions
 
 - [ ] File name doesn't match primary export (e.g. `use-terminal-size.ts` exporting `useResponsiveLayout`)
 - [ ] Stuttered paths (e.g. `commands/commands.ts`)
@@ -209,7 +241,7 @@ Every agent checks ALL of these against its assigned files. Cross-cutting agents
 - [ ] Names that mislead about content (e.g. "types/" containing runtime logic)
 - [ ] Project convention violations (from CLAUDE.md)
 
-### 5. File Organization [cross-cutting]
+### 8. File Organization [cross-cutting]
 
 - [ ] Files in wrong directory based on content/consumers
 - [ ] Domain logic in `utils/` that belongs in `core/` or feature module
@@ -217,7 +249,7 @@ Every agent checks ALL of these against its assigned files. Cross-cutting agents
 - [ ] Test importing across architectural boundaries
 - [ ] Re-exports that should be direct imports
 
-### 6. Type Safety
+### 9. Type Safety
 
 - [ ] `as` type assertions that bypass validation
 - [ ] `any` types that could be narrowed
@@ -225,7 +257,7 @@ Every agent checks ALL of these against its assigned files. Cross-cutting agents
 - [ ] Type aliases that add no semantic value
 - [ ] Branded types without constructors
 
-### 7. Error Handling
+### 10. Error Handling
 
 - [ ] Inconsistent error patterns (some throw, some return, some log)
 - [ ] Raw `throw new Error()` where structured errors exist
@@ -233,7 +265,7 @@ Every agent checks ALL of these against its assigned files. Cross-cutting agents
 - [ ] Error messages that don't help debugging
 - [ ] Missing error handling at system boundaries
 
-### 8. Dead Code & Redundancy
+### 11. Dead Code & Redundancy
 
 - [ ] Unused exports (exported but never imported)
 - [ ] Dead re-exports (re-exported but nobody imports from that path)
@@ -242,7 +274,7 @@ Every agent checks ALL of these against its assigned files. Cross-cutting agents
 - [ ] Variables assigned but never read
 - [ ] Redundant overrides that duplicate base behavior
 
-### 9. Patterns & Best Practices
+### 12. Patterns & Best Practices
 
 - [ ] React: hook rules violations, stale closures, unnecessary refs
 - [ ] React: convention violations (useMemo/useCallback/memo when project bans them)
@@ -252,7 +284,7 @@ Every agent checks ALL of these against its assigned files. Cross-cutting agents
 - [ ] Mutable state where immutable patterns are expected
 - [ ] Callback naming inconsistency across similar interfaces
 
-### 10. Architecture [cross-cutting]
+### 13. Architecture [cross-cutting]
 
 - [ ] Circular dependencies
 - [ ] Wrong-direction imports (e.g. core importing from UI)
@@ -261,14 +293,14 @@ Every agent checks ALL of these against its assigned files. Cross-cutting agents
 - [ ] Factory patterns that could be simplified
 - [ ] Configuration objects being built with fake/dummy data just to satisfy types
 
-### 11. Reusability [cross-cutting]
+### 14. Reusability [cross-cutting]
 
 - [ ] Patterns appearing 3+ times that should be extracted
 - [ ] Similar helper functions in different modules doing the same thing
 - [ ] Shared business logic duplicated between test and source
 - [ ] Constants defined in multiple places instead of one source of truth
 
-### 12. Performance (flag only clear issues)
+### 15. Performance (flag only clear issues)
 
 - [ ] Synchronous I/O in hot paths
 - [ ] Unnecessary re-computation on every render (when framework provides alternatives)
@@ -276,6 +308,45 @@ Every agent checks ALL of these against its assigned files. Cross-cutting agents
 - [ ] Missing early returns causing unnecessary work
 
 ---
+
+## Scoring System
+
+After collecting all findings, score each category 1-5:
+
+| Score | Meaning |
+|-------|---------|
+| 5/5 | No issues found. Exemplary. |
+| 4/5 | Minor issues only (low severity). No action strictly required. |
+| 3/5 | Some medium issues. Should fix for quality. |
+| 2/5 | Multiple high-severity issues. Needs attention. |
+| 1/5 | Critical issues or pervasive problems. Urgent fix needed. |
+
+**Present the scorecard to the user in this format:**
+
+```
+## Scorecard
+
+| Category                    | Score | Issues |
+|-----------------------------|-------|--------|
+| DRY                         | 4/5   | 2 medium |
+| SRP                         | 5/5   | -- |
+| KISS                        | 4/5   | 1 low |
+| YAGNI                       | 5/5   | -- |
+| Over-Engineering            | 3/5   | 1 high, 2 medium |
+| Anti-Slop                   | 5/5   | -- |
+| Naming & Conventions        | 4/5   | 3 low |
+| File Organization           | 3/5   | 2 high |
+| Type Safety                 | 4/5   | 1 medium |
+| Error Handling              | 4/5   | 2 medium |
+| Dead Code & Redundancy      | 3/5   | 1 high, 3 medium |
+| Patterns & Best Practices   | 5/5   | -- |
+| Architecture                | 4/5   | 1 medium |
+| Reusability                 | 3/5   | 2 high |
+| Performance                 | 5/5   | -- |
+| **Overall**                 | **4.1/5** | |
+```
+
+**The goal is 5/5 on every category.** For each category below 5/5, list exactly what needs to change to reach 5/5. The fix plan in Phase 5 must address ALL findings -- not just critical/high, but medium and low too. After executing the plan, every category should score 5/5. If any category can't reach 5/5 (e.g. a fundamental architectural constraint), explain why and what the maximum achievable score is.
 
 ## Severity Guide
 
